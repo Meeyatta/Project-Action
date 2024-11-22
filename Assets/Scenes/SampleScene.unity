@@ -474,11 +474,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b660ebaa19d8647becc069e76383aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gravity_Force: 5
   Ground_Stats:
-    Max_Speed: 0
-    Acceleration: 0
-    Deceleration: 0
-  Ground_Friction: 0
+    Max_Speed: 1
+    Acceleration: 2
+    Deceleration: 2
+  Current_Friction: 0
   Air_Stats:
     Max_Speed: 0
     Acceleration: 0
@@ -487,7 +488,6 @@ MonoBehaviour:
     Max_Speed: 0
     Acceleration: 0
     Deceleration: 0
-  Air_Control: 0
   Velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &666693625
 GameObject:

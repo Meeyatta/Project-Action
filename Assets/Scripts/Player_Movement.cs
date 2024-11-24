@@ -7,8 +7,12 @@ using UnityEngine;
 //Основан на коде движение из Quake 3, адаптированного под Юнити
 public class Player_Movement : MonoBehaviour
 {
+    public bool Queued_Jump; //Если игрок нажимает на прыжок, пока он в воздухе, то дейвстие прыжка ставится в "очередь"
+
+    public float Jump_Force;
     public float Gravity_Force;
 
+    public float Ground_Friction;
     public Move_Stats Ground_Stats; //Скорость игрока на земле
     public float Current_Friction; //Сила трения на земле
 
@@ -54,7 +58,7 @@ public class Player_Movement : MonoBehaviour
         }
         Gravity();
 
-        CharacterController_.Move(Velocity);
+        CharacterController_.Move(Velocity * Time.deltaTime);
     }
     //Влияние гравитации
     void Gravity()
@@ -68,16 +72,51 @@ public class Player_Movement : MonoBehaviour
             Velocity.y += -1 * Gravity_Force * Time.deltaTime;
         }
     }
+    void Friction_Apply(float f)
+    {
+        Vector3 d = Velocity; d.y = 0;
+        float speed = d.magnitude;
+        float decrease = 0;
+
+        if (CharacterController_.isGrounded)
+        {
+            decrease = Mathf.Max(speed, Ground_Stats.Deceleration) * Ground_Friction * f * Time.deltaTime;
+        }
+        float new_speed = speed - decrease;
+
+        if (new_speed < 0) { new_speed = 0; }
+        else { new_speed /= speed; }
+
+        Velocity.x *= new_speed;
+        Velocity.z *= new_speed;
+    }
     //Изменяет ускорение игрока
     void Accelerate(Vector3 dir, float target_speed, float acceleration)
     {
-        Velocity.x += dir.x * target_speed * acceleration * Time.deltaTime;
-        Velocity.z += dir.z * target_speed * acceleration * Time.deltaTime;
+        float max_speed = target_speed;
+        max_speed -= Vector3.Dot(dir, Velocity); //TODO: Проверить без и с этой строчкой
+
+        if (target_speed <= 0) { return; }
+
+        float accel_speed = target_speed * acceleration * Time.deltaTime;
+        if (accel_speed > max_speed) { accel_speed = max_speed; }
+
+        Velocity.x += dir.x * accel_speed;
+        Velocity.z += dir.z * accel_speed;
     }
     //Движение по земле
     void Move_Ground(Vector3 wishdir)
     {
-        //TODO: Сила трения и снижение усорения
+        if (!Queued_Jump)
+        {
+            Friction_Apply(1);
+        }
+        else
+        {
+            Velocity.y = Jump_Force;
+            Queued_Jump = false;
+        }
+
         float maxSpeed = wishdir.magnitude * Ground_Stats.Max_Speed;
         Accelerate(wishdir, maxSpeed, Ground_Stats.Acceleration);
 

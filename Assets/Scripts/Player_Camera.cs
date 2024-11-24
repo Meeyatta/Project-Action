@@ -26,7 +26,7 @@ public class Player_Camera : MonoBehaviour
         rot_V = Mathf.Clamp(rot_V, Vertical_Look_Clamp.x, Vertical_Look_Clamp.y);
         rot.x = Mathf.Tan(Mathf.Deg2Rad * rot_V);
 
-        Debug.Log("Current vertical rotation = " + rot_V);
+        //Debug.Log("Current vertical rotation = " + rot_V);
 
         return rot;
     }
@@ -45,8 +45,8 @@ public class Player_Camera : MonoBehaviour
 
         Cam.transform.localRotation = Rotation_Camera;
 
-        Debug.Log("vertical - " + Rotation_Character);
-        Debug.Log("horizontal - " + Rotation_Camera);
+        //Debug.Log("vertical - " + Rotation_Character);
+        //Debug.Log("horizontal - " + Rotation_Camera);
 
         //Cam.transform.forward = transform.forward *
     }

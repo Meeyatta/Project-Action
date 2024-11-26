@@ -1,0 +1,1 @@
+public enum Weapon_Type { Melee, Ranged };

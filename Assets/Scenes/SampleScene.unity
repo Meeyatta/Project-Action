@@ -1276,8 +1276,8 @@ GameObject:
   m_Component:
   - component: {fileID: 492965980}
   - component: {fileID: 492965983}
+  - component: {fileID: 492965985}
   - component: {fileID: 492965984}
-  - component: {fileID: 492965981}
   - component: {fileID: 492965979}
   - component: {fileID: 492965978}
   m_Layer: 0
@@ -1351,21 +1351,6 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &492965981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492965976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b28f317a114feac4d9e4382450b656b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sensitivity_X: 1.5
-  Sensitivity_Y: 1.5
-  Rotation_Character: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &492965983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,6 +1431,21 @@ MonoBehaviour:
     Acceleration: 50
     Deceleration: 50
   Jump_Able: 0
+--- !u!114 &492965985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492965976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28f317a114feac4d9e4382450b656b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sensitivity_X: 1.2
+  Sensitivity_Y: 1.2
+  Rotation_Character: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &568552513
 GameObject:
   m_ObjectHideFlags: 0

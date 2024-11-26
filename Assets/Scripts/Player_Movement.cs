@@ -35,11 +35,16 @@ public class Player_Movement : MonoBehaviour
         private float Current_Friction = 0;
 
         private Vector3 Current_Input;
-
+        private Vector2 _movementDirection;
+    
         Player_Camera Player_Camera_;
+
+        Player_Inputs Player_Inputs_;
 
         void Awake()
         {
+            Player_Inputs_ = new Player_Inputs();
+            Player_Inputs_.Enable();
             Player_Camera_ = GetComponent<Player_Camera>();
             Controller = GetComponent<CharacterController>();
         }
@@ -50,7 +55,9 @@ public class Player_Movement : MonoBehaviour
 
         private void Update()
         {
-            Current_Input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            Vector2 readValue = Player_Inputs_.Standard.Movement.ReadValue<Vector2>();
+            Debug.Log(readValue.x);
+            Current_Input = new Vector3(readValue.x, 0, readValue.y);
 
             // Set movement state.
             if (Controller.isGrounded)

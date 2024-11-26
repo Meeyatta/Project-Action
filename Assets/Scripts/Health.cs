@@ -1,34 +1,53 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
-public class Health : MonoBehaviour, IDamageable
+//Класс, позволяющий объектам иметь максимальное и текущее здоровье
+public class Health : MonoBehaviour
 {
-    public float Health_Max { get; set; }
 
-    public float Health_Current { get; set; }
+    public float Health_Max;
 
-    public virtual void Die()
+    [SerializeField] private float Health_Current;
+
+    public virtual void Die(iHealthInteractable s)
     {
-        Debug.Log(gameObject.name + " has died");
+        if (s != null)
+        {
+            Debug.Log(gameObject.name + " умер от " + s.Name);
+        }
     }
+    //Напрямую устанавливает здровье игрока до максимума. Нужно вызвать, когда игрок появляется, чтобы
+    //игрок сразу же не умер
     public virtual void Health_Reset()
     {
         Health_Current = Health_Max;
     }
-    public virtual void Take_Damage(float damage, IDamaging source)
+
+    //Получение урона и лечения. "s" - источник того, что наносит нам урон. Может быть null, поэтому всегда проверяем
+    public virtual void Take_Damage(float d, iHealthInteractable s)
     {
-        Debug.Log(gameObject.name + " took " + damage + " damage from " + source.Name);
-        Health_Current = Mathf.Clamp(Health_Current - damage, 0, Health_Max);
-        if (Health_Current <= 0) { Die(); }
+        if (s != null)
+        {
+            Debug.Log(gameObject.name + " получил " + d + " урона от " + s.Name);
+        }
+        else { Debug.Log(gameObject.name + " получил " + d + " урона"); }
+
+        Health_Current = Mathf.Clamp(Health_Current - d, 0, Health_Max);
+        if (Health_Current <= 0) { Die(s); }
     }
 
-    public virtual void Take_Healing(float healing, IHealing source)
+    public virtual void Take_Healing(float h, iHealthInteractable s)
     {
-        Debug.Log(gameObject.name + " received " + healing + " healing from " + source.Name);
-        Health_Current = Mathf.Clamp(Health_Current + healing, 0, Health_Max);
-        if (Health_Current <= 0) { Die(); }
+        if (s != null)
+        {
+            Debug.Log(gameObject.name + " получил " + h + " лечения от " + s.Name);
+        }
+        else { Debug.Log(gameObject.name + " получил " + h + " лечения"); }
+
+        Health_Current = Mathf.Clamp(Health_Current + h, 0, Health_Max);
+        if (Health_Current <= 0) { Die(s); }
     }
     void Awake()
     {
@@ -40,6 +59,6 @@ public class Health : MonoBehaviour, IDamageable
     }
     void Update()
     {
-        
+
     }
 }

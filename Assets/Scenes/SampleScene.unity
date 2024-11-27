@@ -1276,6 +1276,8 @@ GameObject:
   m_Component:
   - component: {fileID: 492965980}
   - component: {fileID: 492965983}
+  - component: {fileID: 492965986}
+  - component: {fileID: 492965985}
   - component: {fileID: 492965984}
   - component: {fileID: 492965981}
   - component: {fileID: 492965979}
@@ -1446,6 +1448,32 @@ MonoBehaviour:
     Acceleration: 50
     Deceleration: 50
   Jump_Able: 0
+--- !u!114 &492965985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492965976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4748e06b7075e4e8981bc00e964f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health_Max: 100
+  Health_Current: 0
+--- !u!114 &492965986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492965976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ba16205e7ec6f4ab8a4dafee9b6a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &568552513
 GameObject:
   m_ObjectHideFlags: 0

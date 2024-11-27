@@ -37,6 +37,24 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Fire_Main"",
+                    ""type"": ""Button"",
+                    ""id"": ""5886dd99-c112-4513-b7b6-c37aba00d1f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire_Secondary"",
+                    ""type"": ""Button"",
+                    ""id"": ""82137e98-b792-410b-b6b0-c0f89d104499"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""c1cd69bf-447b-4b47-9900-cf704c720f25"",
@@ -66,6 +84,28 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""833df4fc-7328-49c8-969c-c50d4b953a9a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire_Main"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29c875eb-c9d3-4a67-92b2-ceb2950577b0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire_Secondary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -132,6 +172,8 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
         // Standard
         m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
         m_Standard_Jump = m_Standard.FindAction("Jump", throwIfNotFound: true);
+        m_Standard_Fire_Main = m_Standard.FindAction("Fire_Main", throwIfNotFound: true);
+        m_Standard_Fire_Secondary = m_Standard.FindAction("Fire_Secondary", throwIfNotFound: true);
         m_Standard_Movement = m_Standard.FindAction("Movement", throwIfNotFound: true);
     }
 
@@ -195,12 +237,16 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Standard;
     private List<IStandardActions> m_StandardActionsCallbackInterfaces = new List<IStandardActions>();
     private readonly InputAction m_Standard_Jump;
+    private readonly InputAction m_Standard_Fire_Main;
+    private readonly InputAction m_Standard_Fire_Secondary;
     private readonly InputAction m_Standard_Movement;
     public struct StandardActions
     {
         private @Player_Inputs m_Wrapper;
         public StandardActions(@Player_Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_Standard_Jump;
+        public InputAction @Fire_Main => m_Wrapper.m_Standard_Fire_Main;
+        public InputAction @Fire_Secondary => m_Wrapper.m_Standard_Fire_Secondary;
         public InputAction @Movement => m_Wrapper.m_Standard_Movement;
         public InputActionMap Get() { return m_Wrapper.m_Standard; }
         public void Enable() { Get().Enable(); }
@@ -214,6 +260,12 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Fire_Main.started += instance.OnFire_Main;
+            @Fire_Main.performed += instance.OnFire_Main;
+            @Fire_Main.canceled += instance.OnFire_Main;
+            @Fire_Secondary.started += instance.OnFire_Secondary;
+            @Fire_Secondary.performed += instance.OnFire_Secondary;
+            @Fire_Secondary.canceled += instance.OnFire_Secondary;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
@@ -224,6 +276,12 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Fire_Main.started -= instance.OnFire_Main;
+            @Fire_Main.performed -= instance.OnFire_Main;
+            @Fire_Main.canceled -= instance.OnFire_Main;
+            @Fire_Secondary.started -= instance.OnFire_Secondary;
+            @Fire_Secondary.performed -= instance.OnFire_Secondary;
+            @Fire_Secondary.canceled -= instance.OnFire_Secondary;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
@@ -247,6 +305,8 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
     public interface IStandardActions
     {
         void OnJump(InputAction.CallbackContext context);
+        void OnFire_Main(InputAction.CallbackContext context);
+        void OnFire_Secondary(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
     }
 }

@@ -1,1 +1,1 @@
-public enum Weapon_Type { Melee, Ranged };
+public enum Weapon_Type { TODO };

@@ -6,20 +6,20 @@ public class Test_Damaging : MonoBehaviour, iHealthInteractable
 {
     public float Amount;
     public string Name { get; set; } = "Test";
-    public float Damage_Delay { get; set; } = 0.4f;
-    public float Next_Damage_Window { get; set; }
+    public float Delay { get; set; } = 0.4f;
+    public float Next_Window { get; set; }
     void Awake()
     {
 
     }
     void Start()
     {
-        Next_Damage_Window = Time.time;
+        Next_Window = Time.time;
     }
     public void Deal_Amount(float a, Health t)
     {
-        if (Time.time > Next_Damage_Window) 
-        { t.Take_Damage(a, this); Next_Damage_Window = Time.time + Damage_Delay; }
+        if (Time.time > Next_Window) 
+        { t.Take_Damage(a, this); Next_Window = Time.time + Delay; }
     }
 
     void Update()

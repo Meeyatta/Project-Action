@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " умер от " + s.Name);
+            Debug.Log(gameObject.name + " умер от " + s.Damage_Name);
         }
     }
     //Напрямую устанавливает здровье игрока до максимума. Нужно вызвать, когда игрок появляется, чтобы
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " получил " + d + " урона от " + s.Name);
+            Debug.Log(gameObject.name + " получил " + d + " урона от " + s.Damage_Name);
         }
         else { Debug.Log(gameObject.name + " получил " + d + " урона"); }
 
@@ -42,7 +42,7 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " получил " + h + " лечения от " + s.Name);
+            Debug.Log(gameObject.name + " получил " + h + " лечения от " + s.Damage_Name);
         }
         else { Debug.Log(gameObject.name + " получил " + h + " лечения"); }
 

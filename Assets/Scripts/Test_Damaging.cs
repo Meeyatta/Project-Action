@@ -5,7 +5,7 @@ using UnityEngine;
 public class Test_Damaging : MonoBehaviour, iHealthInteractable
 {
     public float Amount;
-    public string Name { get; set; } = "Test";
+    public string Damage_Name { get; set; } = "Test";
     public float Delay { get; set; } = 0.4f;
     public float Next_Window { get; set; }
     void Awake()

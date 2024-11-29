@@ -5,7 +5,7 @@ using UnityEngine;
 //Интерфейс для всего, что наносит урон или лечит
 public interface iHealthInteractable
 {
-    public string Name { get; set; }
+    public string Damage_Name { get; set; }
 
     //Все, что наносит урон должно иметь встроенную защиту от того, чтобы наносить урон
     //несколько раз за кадр (~0.8 секунд). Для этого после того как 

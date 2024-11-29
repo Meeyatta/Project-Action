@@ -6,7 +6,8 @@
 
 /*
     Характеристики оружия:
-    Weapon_Name - Имя оружия
+    Weapon_Name - Имя оружия, которое показывается игроку
+    Weapon_Index_ - Индекс оружия, как к нему "обращается" игра
     Damage - Как много урона мы наносим за раз
     Type - Тип, служит как краткое "описание" оружия. TODO
     Uses - Как много раз мы можем использовать оружие. Разное оружие используется по разному
@@ -21,6 +22,7 @@ public class Weapon : ScriptableObject, iHealthInteractable
 {
     [Header("Оружие")]
     public string Weapon_Name;
+    public Weapon_Index Weapon_Index_;
     public GameObject Model;
     public int Damage;
     public Weapon_Type Type;

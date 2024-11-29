@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 //Этот код будет отвечать за смену оружия и их прямое использование, функционал и 
@@ -9,6 +10,11 @@ using UnityEngine.InputSystem;
 public class Weapon_Manager : MonoBehaviour
 {
     public Weapon Weapon_Current;
+    //TODO:
+
+    public UnityEvent<Weapon_Index> Change_Weapon;
+
+    public static Weapon_Manager instance;
     public void Equip(Weapon w)
     {
         Weapon_Current = w;
@@ -31,7 +37,15 @@ public class Weapon_Manager : MonoBehaviour
     }
     void Awake()
     {
-        
+        if (instance != null)
+        {
+            Destroy(instance);
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this);
     }
     void Start()
     {

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9758a74bbd4e3f94ea0d8352f70fc62c, type: 3}
   m_Name: Test_Ranged_Weapon
   m_EditorClassIdentifier: 
-  Amount: 0
+  Weapon_Name: Test Weapon
+  Model: {fileID: 0}
+  Damage: 0
   Type: 0
   Uses: 1
+  Cam: {fileID: 0}
   Use_Size: 1
   Max_Range: 9999
   Layers:

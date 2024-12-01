@@ -13,16 +13,18 @@ public class Weapon_Ranged : Weapon
     public float Max_Range; //Дальше этой дистанции мы не наносим НИКАКОГО УРОНА. Дистанция должна быть крайне большой
     public LayerMask Layers; //Какие слои объектов учитываем, вычисляя цель
 
-    public override Health Find_Target()
+    public override Healths Find_Target()
     {
-        
+        Healths hs = new Healths(); hs.Targets = new List<Health>();
+
         RaycastHit hit;
         Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Max_Range, Layers);
 
         Debug.Log("Игрок попал по " + hit.collider.gameObject.name + " из " + Weapon_Index_);
         if (hit.collider.gameObject.TryGetComponent<Health>(out Health hp))
         {
-            return hp;
+            hs.Targets.Add(hp);
+            return hs;
         }
         else
         {
@@ -31,25 +33,22 @@ public class Weapon_Ranged : Weapon
     }
     public override void Use_Main()
     {
-        Health hp =  Find_Target();
-        if (hp != null) 
+        References();
+
+        Healths hs = new Healths(); hs.Targets = new List<Health>();
+
+        hs.Targets = Find_Target().Targets;
+        foreach (Health hp in hs.Targets)
         {
             hp.Take_Damage(Damage, this);
         }
     }
+
     public override void Use_Secondary()
     {
         
     }
 
-    void Awake()
-    {
-        References();
-    }
-    void Start()
-    {
-        References();
-    }
 
     void Update()
     {

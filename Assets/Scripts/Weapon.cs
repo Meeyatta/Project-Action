@@ -18,12 +18,15 @@
  */
 
 //[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Weapon", order = 1)]
+[System.Serializable]
 public class Weapon : ScriptableObject, iHealthInteractable
 {
     [Header("Оружие")]
+    
     public string Weapon_Name;
     public Weapon_Index Weapon_Index_;
     public GameObject Model;
+    
     public int Damage;
     public Weapon_Type Type;
     public int Uses; //Как много раз мы можем использовать оружие
@@ -31,30 +34,45 @@ public class Weapon : ScriptableObject, iHealthInteractable
     public string Damage_Name { get; set ; }
     public float Delay { get; set; }
     public float Next_Window { get; set; }
-    public virtual Health Find_Target()
+
+    //Код здесь ответственен за поиск всех целей, на которые мы будем влиять
+    public virtual Healths Find_Target()
     {
+        
         return null;
     }
+
+    //Основной огонь оружия
     public virtual void Use_Main()
     {
         Debug.Log("Основной огонь " + Damage_Name);
     }
+
+    //Второстепенный огонь оружия
     public virtual void Use_Secondary()
     {
         Debug.Log("Альтернативный огонь " + Damage_Name);
     }
+
+    //Само нанесение урона
     public virtual void Deal_Amount(float a, Health t)
     {
         if (Time.time > Next_Window)
         { t.Take_Damage(a, this); Next_Window = Time.time + Delay; }
     }
-    //Проверяет и если  что переназначает референсы
+
+    //Возвращает имя оружия. Позволяет коду здоровья выводить 
+    //имя атакующего при получении урона
+    public virtual string Source() 
+    {
+        return Weapon_Name;
+    }
+    //Проверяет и если что переназначает референсы
     public virtual void References()
     {
         if (Cam == null) { Cam = Camera.main; }
     }
     void Awake()
     {
-        References();
     }
 }

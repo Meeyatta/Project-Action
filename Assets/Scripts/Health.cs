@@ -4,6 +4,7 @@ using UnityEngine;
 using static Unity.VisualScripting.Member;
 
 //Класс, позволяющий объектам иметь максимальное и текущее здоровье
+[System.Serializable]
 public class Health : MonoBehaviour
 {
 
@@ -15,7 +16,7 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " умер от " + s.Damage_Name);
+            Debug.Log(gameObject.name + " умер от " + s.Source());
         }
     }
     //Напрямую устанавливает здровье игрока до максимума. Нужно вызвать, когда игрок появляется, чтобы
@@ -30,7 +31,8 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " получил " + d + " урона от " + s.Damage_Name);
+            
+            Debug.Log(gameObject.name + " получил " + d + " урона от " + s.Source());
         }
         else { Debug.Log(gameObject.name + " получил " + d + " урона"); }
 
@@ -42,7 +44,7 @@ public class Health : MonoBehaviour
     {
         if (s != null)
         {
-            Debug.Log(gameObject.name + " получил " + h + " лечения от " + s.Damage_Name);
+            Debug.Log(gameObject.name + " получил " + h + " лечения от " + s.Source());
         }
         else { Debug.Log(gameObject.name + " получил " + h + " лечения"); }
 

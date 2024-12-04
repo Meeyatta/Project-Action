@@ -7,14 +7,14 @@ using UnityEngine.InputSystem;
 //Этот код будет отвечать за смену оружия и их прямое использование, функционал и 
 //особенности каждого оружия должны описываться внутри каждого отдельного
 //оружия в классе, наследующегося от класса Weapon
-public class Weapon_Manager : MonoBehaviour
+public class WeaponManager : MonoBehaviour
 {
     public Weapon Weapon_Current;
     //TODO:
 
     public UnityEvent<Weapon_Index> Change_Weapon;
 
-    public static Weapon_Manager instance;
+    public static WeaponManager instance;
     public void Equip(Weapon w)
     {
         Weapon_Current = w;

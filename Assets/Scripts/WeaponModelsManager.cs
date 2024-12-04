@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_Models_Manager : MonoBehaviour
+public class WeaponModelsManager : MonoBehaviour
 {
     public Dictionary<Weapon_Index, GameObject> Weapons = new Dictionary<Weapon_Index, GameObject>();
-    public static Weapon_Models_Manager instance;
+    public static WeaponModelsManager instance;
     void Awake()
     {
         if (instance != null) 

@@ -7,17 +7,35 @@ using UnityEngine.InputSystem;
 //Этот код будет отвечать за смену оружия и их прямое использование, функционал и 
 //особенности каждого оружия должны описываться внутри каждого отдельного
 //оружия в классе, наследующегося от класса Weapon
-public class WeaponManager : MonoBehaviour
+public class Weapon_Manager : MonoBehaviour
 {
     public Weapon Weapon_Current;
-    //TODO:
+
+    [SerializeField] const int Max_Weapons_Equipped = 3;
+    public Dictionary<Weapon_Index , Weapon> Weapons_Equipped;
 
     public UnityEvent<Weapon_Index> Change_Weapon;
 
-    public static WeaponManager instance;
-    public void Equip(Weapon w)
+    public static Weapon_Manager instance;
+
+    void Equip_Main(Weapon_Index w)
     {
-        Weapon_Current = w;
+        Change_Weapon.Invoke(w);
+        Weapon_Current = Weapons_Equipped[w];
+    }
+
+    public void Pick_Up(Weapon w)
+    {
+        if (Weapons_Equipped.Count >= Max_Weapons_Equipped)
+        {
+            Weapons_Equipped.Remove(Weapon_Current.Weapon_Index_);
+            Weapons_Equipped.Add(w.Weapon_Index_, w);
+            Equip_Main(w.Weapon_Index_);
+        }
+        else
+        {
+            Weapons_Equipped.Add(w.Weapon_Index_, w);
+        }
     }
     public void Fire_Main(InputAction.CallbackContext c)
     {
@@ -47,13 +65,7 @@ public class WeaponManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
     }

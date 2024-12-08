@@ -7,18 +7,20 @@ using UnityEngine.InputSystem;
 //Этот код будет отвечать за смену оружия и их прямое использование, функционал и 
 //особенности каждого оружия должны описываться внутри каждого отдельного
 //оружия в классе, наследующегося от класса Weapon
-public class Weapon_Manager : MonoBehaviour
+public class WeaponManager : MonoBehaviour
 {
     public Weapon Weapon_Current;
 
     [SerializeField] const int Max_Weapons_Equipped = 3;
-    public Dictionary<Weapon_Index , Weapon> Weapons_Equipped = new Dictionary<Weapon_Index, Weapon>();
+    public Dictionary<WeaponIndex , Weapon> Weapons_Equipped = new Dictionary<WeaponIndex, Weapon>();
+
+    GameObject WeaponsObj;
     public List<Weapon> Weapons;
 
-    public UnityEvent<Weapon_Index> Change_Weapon;
+    public UnityEvent<WeaponIndex> On_ChangeWeapon;
 
-    public static Weapon_Manager instance;
-    public Weapon Get_Weapon(Weapon_Index ind)
+    public static WeaponManager instance;
+    public Weapon Get_Weapon(WeaponIndex ind)
     {
         foreach (Weapon weapon in Weapons)
         {
@@ -27,14 +29,14 @@ public class Weapon_Manager : MonoBehaviour
         Debug.LogError(this.name + " НЕ СМОГ НАЙТИ ОРУЖИЕ С ИНДЕКСОМ " + ind);
         return null;
     }
-    void Equip_Main(Weapon_Index w)
+    void Equip_Main(WeaponIndex w)
     {
         if (!Weapons_Equipped.ContainsKey(w)) {
             Debug.LogError(this.name + " ОРУЖИЕ С ИНДЕКСОМ " + w + " НЕ ЭКИПИРОВАНО");
             return;
         }
 
-        Change_Weapon.Invoke(w);
+        On_ChangeWeapon.Invoke(w);
         foreach (Weapon wn in Weapons) 
         {
             if (wn.Weapon_Index_ != w) { wn.gameObject.SetActive(false); }
@@ -42,8 +44,7 @@ public class Weapon_Manager : MonoBehaviour
         }
         Weapon_Current = Weapons_Equipped[w];
     }
-
-    public void Pick_Up(Weapon_Index w)
+    public void Pick_Up(WeaponIndex w)
     {
         if (Weapons_Equipped.Count >= Max_Weapons_Equipped)
         {
@@ -60,7 +61,7 @@ public class Weapon_Manager : MonoBehaviour
     {
         if (c.started) 
         {
-            Weapon_Current.Use_Main();
+            Weapon_Current.UseMain();
         }
 
     }
@@ -68,7 +69,7 @@ public class Weapon_Manager : MonoBehaviour
     {
         if (c.started)
         {
-            Weapon_Current.Use_Secondary();
+            Weapon_Current.UseSecondary();
         }
 
     }
@@ -83,15 +84,17 @@ public class Weapon_Manager : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(this);
+
+        WeaponsObj = transform.Find("Weapons").gameObject;
     }
     private void Start()
     {
-        foreach (Transform t in transform)
+        foreach (Transform t in WeaponsObj.transform)
         {
             Weapons.Add(t.gameObject.GetComponent<Weapon>());  
         }
 
-        Pick_Up(Weapon_Index.Test_Gun);
-        Equip_Main(Weapon_Index.Test_Gun);
+        Pick_Up(WeaponIndex.Test_Gun);
+        Equip_Main(WeaponIndex.Test_Gun);
     }
 }

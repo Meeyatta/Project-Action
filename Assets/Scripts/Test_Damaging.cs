@@ -16,7 +16,7 @@ public class Test_Damaging : MonoBehaviour, iHealthInteractable
     {
         Next_Window = Time.time;
     }
-    public void Deal_Amount(float a, Health t)
+    public void DealAmount(float a, Health t)
     {
         if (Time.time > Next_Window) 
         { t.Take_Damage(a, this); Next_Window = Time.time + Delay; }
@@ -25,6 +25,6 @@ public class Test_Damaging : MonoBehaviour, iHealthInteractable
     void Update()
     {
         //ТЕСТОВЫЙ СПОСОБ НАНОСИТЬ УРОН, НИКОГДА ТАК БОЛЬШЕ НЕ ДЕЛАТЬ
-        if (Input.GetKey("d")) Deal_Amount(Amount, GameObject.Find("Player").GetComponent<Health>()); 
+        if (Input.GetKey("d")) DealAmount(Amount, GameObject.Find("Player").GetComponent<Health>()); 
     }
 }

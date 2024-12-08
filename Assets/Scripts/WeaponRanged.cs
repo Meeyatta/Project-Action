@@ -13,7 +13,7 @@ public class WeaponRanged : Weapon
     public float Max_Range; //Дальше этой дистанции мы не наносим НИКАКОГО УРОНА. Дистанция должна быть крайне большой
     public LayerMask Layers; //Какие слои объектов учитываем, вычисляя цель
 
-    public override List<Health> Find_Target()
+    public override List<Health> FindTarget()
     {
         List<Health> hs = new List<Health>(); 
 
@@ -31,13 +31,13 @@ public class WeaponRanged : Weapon
             return null;
         }
     }
-    public override void Use_Main()
+    public override void UseMain()
     {
         References();
 
         List<Health> hs = new List<Health>();
 
-        hs = Find_Target();
+        hs = FindTarget();
         if (hs != null)
         {
             foreach (Health hp in hs)
@@ -47,7 +47,7 @@ public class WeaponRanged : Weapon
         }
     }
 
-    public override void Use_Secondary()
+    public override void UseSecondary()
     {
         
     }

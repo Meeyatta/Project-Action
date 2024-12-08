@@ -5,10 +5,10 @@ using UnityEngine;
 //Позволяет менять модельку текущего оружия в руках игрока
 public class Weapon_Models_Manager : MonoBehaviour
 {
-    public Dictionary<Weapon_Index, GameObject> Weapons = new Dictionary<Weapon_Index, GameObject>();
+    public Dictionary<WeaponIndex, GameObject> Weapons = new Dictionary<WeaponIndex, GameObject>();
     public List<Weapon> Starter_Weapons;
 
-    Weapon_Manager WM;
+    WeaponManager WM;
     public static Weapon_Models_Manager instance;
     void Awake()
     {
@@ -22,7 +22,7 @@ public class Weapon_Models_Manager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        WM = GetComponent<Weapon_Manager>();
+        WM = GetComponent<WeaponManager>();
     }
     private void Start()
     {
@@ -33,16 +33,16 @@ public class Weapon_Models_Manager : MonoBehaviour
     }
     private void OnEnable()
     {
-        WM.Change_Weapon.AddListener(Show_Weapon);
+        WM.On_ChangeWeapon.AddListener(Show_Weapon);
     }
     private void OnDisable()
     {
-        WM.Change_Weapon.RemoveListener(Show_Weapon);
+        WM.On_ChangeWeapon.RemoveListener(Show_Weapon);
     }
 
     //Пытаемся найти оружие, которое игрок пытается достать,
     //выключая объекты всего кроме указанного
-    void Show_Weapon(Weapon_Index w_i)
+    void Show_Weapon(WeaponIndex w_i)
     {
         foreach (var w in Weapons)
         {

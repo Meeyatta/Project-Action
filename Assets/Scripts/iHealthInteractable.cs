@@ -14,7 +14,7 @@ public interface iHealthInteractable
     //на Damage_Delay секунд
     public float Delay { get; set; }
     public float Next_Window { get;set; }
-    public virtual void Deal_Amount(float amount, Health target) { }
+    public virtual void DealAmount(float amount, Health target) { }
 
 }
 

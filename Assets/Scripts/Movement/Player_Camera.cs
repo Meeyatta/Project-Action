@@ -60,11 +60,19 @@ public class Player_Camera : MonoBehaviour
         Rotation_Camera = this.transform.localRotation;
         Rotation_Character = CharacterController_.transform.localRotation;
 
+        LockUpdate();
+    }
+    void LockUpdate()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     void Update()
     {
         Camera_Move();
+    }
+    private void FixedUpdate()
+    {
+        LockUpdate();
     }
 }

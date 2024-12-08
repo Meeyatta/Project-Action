@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour, iHealthInteractable
     [Header("Оружие")]
     
     public string Weapon_Name;
-    public Weapon_Index Weapon_Index_;
+    public WeaponIndex Weapon_Index_;
     public GameObject Model;
     
     public int Damage;
@@ -37,31 +37,45 @@ public class Weapon : MonoBehaviour, iHealthInteractable
     public float Next_Window { get; set; }
 
     //Код здесь ответственен за поиск всех целей, на которые мы будем влиять
-    public virtual List<Health> Find_Target()
+    public virtual List<Health> FindTarget()
     {
         
         return null;
     }
 
     //Основной огонь оружия
-    public virtual void Use_Main()
+    public virtual void UseMain()
     {
         Debug.Log("Основной огонь " + Damage_Name);
     }
 
     //Второстепенный огонь оружия
-    public virtual void Use_Secondary()
+    public virtual void UseSecondary()
     {
         Debug.Log("Альтернативный огонь " + Damage_Name);
     }
 
     //Само нанесение урона
-    public virtual void Deal_Amount(float a, Health t)
+    public virtual void DealAmount(float a, Health t)
     {
         if (Time.time > Next_Window)
         { t.Take_Damage(a, this); Next_Window = Time.time + Delay; }
     }
+    //Показывает модель в руках игрока
+    public virtual void ShowModel()
+    {
 
+    }
+    //Создает модель оружия в руках игрока
+    public virtual void HideModel()
+    {
+
+    }
+    //Создает объект модели оружия, который будет появляться, когда мы используем оружие
+    public virtual void CreateModel()
+    {
+        
+    }
     //Возвращает имя оружия. Позволяет коду здоровья выводить 
     //имя атакующего при получении урона
     public virtual string Source() 

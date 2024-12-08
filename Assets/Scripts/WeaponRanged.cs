@@ -6,16 +6,16 @@ using UnityEngine;
 //цели находят при его столкновении с объектами
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Ranged Weapon", order = 1)]
-public class Weapon_Ranged : Weapon
+public class WeaponRanged : Weapon
 {
     [Header("Специально для огнестрельного")]
     public int Use_Size; //У большинства оружий дальнего боя есть магазин, эта переменная отвечает за его размер
     public float Max_Range; //Дальше этой дистанции мы не наносим НИКАКОГО УРОНА. Дистанция должна быть крайне большой
     public LayerMask Layers; //Какие слои объектов учитываем, вычисляя цель
 
-    public override Healths Find_Target()
+    public override List<Health> Find_Target()
     {
-        Healths hs = new Healths(); hs.Targets = new List<Health>();
+        List<Health> hs = new List<Health>(); 
 
         RaycastHit hit;
         Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Max_Range, Layers);
@@ -23,7 +23,7 @@ public class Weapon_Ranged : Weapon
         Debug.Log("Игрок попал по " + hit.collider.gameObject.name + " из " + Weapon_Index_);
         if (hit.collider.gameObject.TryGetComponent<Health>(out Health hp))
         {
-            hs.Targets.Add(hp);
+            hs.Add(hp);
             return hs;
         }
         else
@@ -35,12 +35,15 @@ public class Weapon_Ranged : Weapon
     {
         References();
 
-        Healths hs = new Healths(); hs.Targets = new List<Health>();
+        List<Health> hs = new List<Health>();
 
-        hs.Targets = Find_Target().Targets;
-        foreach (Health hp in hs.Targets)
+        hs = Find_Target();
+        if (hs != null)
         {
-            hp.Take_Damage(Damage, this);
+            foreach (Health hp in hs)
+            {
+                hp.Take_Damage(Damage, this);
+            }
         }
     }
 

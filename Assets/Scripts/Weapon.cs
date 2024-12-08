@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 //Скриптовый объект оружия
 //Файл, который хранит данные принадлежащие оружию. 
@@ -19,7 +20,7 @@
 
 //[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Weapon", order = 1)]
 [System.Serializable]
-public class Weapon : ScriptableObject, iHealthInteractable
+public class Weapon : MonoBehaviour, iHealthInteractable
 {
     [Header("Оружие")]
     
@@ -36,7 +37,7 @@ public class Weapon : ScriptableObject, iHealthInteractable
     public float Next_Window { get; set; }
 
     //Код здесь ответственен за поиск всех целей, на которые мы будем влиять
-    public virtual Healths Find_Target()
+    public virtual List<Health> Find_Target()
     {
         
         return null;

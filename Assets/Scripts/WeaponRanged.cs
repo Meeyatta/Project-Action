@@ -5,7 +5,6 @@ using UnityEngine;
 //Оружия дальнего боя зачастую при стрельбе выпускают луч,
 //цели находят при его столкновении с объектами
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Ranged Weapon", order = 1)]
 public class WeaponRanged : Weapon
 {
     [Header("Специально для огнестрельного")]

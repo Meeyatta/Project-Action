@@ -4,21 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 public class CurrentWeaponModelHandle : MonoBehaviour
 {
-    public GameObject CurrentModel;
-
-    GameObject WeaponsObj;
-    public List<Weapon> Weapons;
 
     public static CurrentWeaponModelHandle instance;
-
-    void ChangeModel(WeaponIndex ind)
-    {
-        CurrentModel.SetActive(false);
-        Debug.Log("—Ã≈Õ»À» “≈ ”Ÿ≈≈ Œ–”∆»≈ Õ¿ " + ind);
-
-    }
-
-    private void Awake()
+    void Awake()
     {
         if (instance != null)
         {
@@ -30,12 +18,12 @@ public class CurrentWeaponModelHandle : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        WeaponsObj = transform.Find("Weapons").gameObject;
     }
-    private void OnEnable()
+    void ChangeModel(WeaponIndex ind)
     {
         
     }
+    
     private void OnDisable()
     {
         WeaponManager.instance.On_ChangeWeapon.RemoveListener(ChangeModel);
@@ -46,10 +34,7 @@ public class CurrentWeaponModelHandle : MonoBehaviour
     void Start()
     {
         WeaponManager.instance.On_ChangeWeapon.AddListener(ChangeModel);
-        foreach (Transform t in WeaponsObj.transform)
-        {
-            Weapons.Add(t.gameObject.GetComponent<Weapon>());
-        }
+        
     }
 
     // Update is called once per frame

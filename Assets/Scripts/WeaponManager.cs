@@ -14,21 +14,11 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] const int Max_Weapons_Equipped = 3;
     public Dictionary<WeaponIndex , Weapon> Weapons_Equipped = new Dictionary<WeaponIndex, Weapon>();
 
-    GameObject WeaponsObj;
-    public List<Weapon> Weapons;
 
     public UnityEvent<WeaponIndex> On_ChangeWeapon;
 
     public static WeaponManager instance;
-    public Weapon Get_Weapon(WeaponIndex ind)
-    {
-        foreach (Weapon weapon in Weapons)
-        {
-            if (weapon.Weapon_Index_ == ind) return weapon;
-        }
-        Debug.LogError(this.name + " НЕ СМОГ НАЙТИ ОРУЖИЕ С ИНДЕКСОМ " + ind);
-        return null;
-    }
+
     void Equip_Main(WeaponIndex w)
     {
         if (!Weapons_Equipped.ContainsKey(w)) {
@@ -37,11 +27,6 @@ public class WeaponManager : MonoBehaviour
         }
 
         On_ChangeWeapon.Invoke(w);
-        foreach (Weapon wn in Weapons) 
-        {
-            if (wn.Weapon_Index_ != w) { wn.gameObject.SetActive(false); }
-            else {  wn.gameObject.SetActive(true); }
-        }
         Weapon_Current = Weapons_Equipped[w];
     }
     public void Pick_Up(WeaponIndex w)
@@ -49,12 +34,12 @@ public class WeaponManager : MonoBehaviour
         if (Weapons_Equipped.Count >= Max_Weapons_Equipped)
         {
             Weapons_Equipped.Remove(Weapon_Current.Weapon_Index_);
-            Weapons_Equipped.Add(w, Get_Weapon(w));
+            Weapons_Equipped.Add(w, Weapons.instance.Get(w));
             Equip_Main(w);
         }
         else
         {
-            Weapons_Equipped.Add(w, Get_Weapon(w));
+            Weapons_Equipped.Add(w, Weapons.instance.Get(w));
         }
     }
     public void Fire_Main(InputAction.CallbackContext c)
@@ -85,14 +70,10 @@ public class WeaponManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        WeaponsObj = transform.Find("Weapons").gameObject;
     }
     private void Start()
     {
-        foreach (Transform t in WeaponsObj.transform)
-        {
-            Weapons.Add(t.gameObject.GetComponent<Weapon>());  
-        }
+        
 
         Pick_Up(WeaponIndex.Test_Gun);
         Equip_Main(WeaponIndex.Test_Gun);

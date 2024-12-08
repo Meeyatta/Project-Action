@@ -2062,7 +2062,9 @@ PrefabInstance:
     - target: {fileID: 11441180, guid: c080686877cf77f42a1a078076d57fe5, type: 3}
       propertyPath: textList.Array.data[0].s
       value: "\u041E\u0440\u0443\u0436\u0438\u044F\n\t\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
-        \u043A\u043E\u0434 \u0434\u043B\u044F \u0441\u043C\u0435\u043D\u044B \u043E\u0440\u0443\u0436\u0438\u044F\n\t\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
+        \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0435\u043B\u044C\u043A\u0438
+        \u043E\u0440\u0443\u0436\u0438\u044F \u043D\u0430 \u044D\u043A\u0440\u0430\u043D\u0435
+        \u043F\u0440\u0438 \u0435\u0433\u043E \n\u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438\n\t\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
         \u0442\u0435\u0441\u0442\u043E\u0432\u044B\u0439 UI \u0434\u043B\u044F \u0441\u043C\u0435\u043D\u044B
         \u043E\u0440\u0443\u0436\u0438\u044F\n\t\u041F\u0440\u0438\u0432\u044F\u0437\u0430\u0442\u044C
         UI \u0438 \u043A\u043E\u0434 \u043A \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044E\n\u0414\u0432\u0438\u0436\u0435\u043D\u0438\u0435\n\t\u0421\u0434\u0435\u043B\u0430\u0442\u044C
@@ -2865,62 +2867,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!1 &1138964188
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1138964189}
-  - component: {fileID: 1138964190}
-  m_Layer: 0
-  m_Name: TestRangedWeapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1138964189
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138964188}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1179508134}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1138964190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138964188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b06f7fee1bdfcc647b44ab12ff023d42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weapon_Name: Test Ranged Weapon
-  Weapon_Index_: 0
-  Model: {fileID: 9212213312296223600, guid: 103b35ce2f1073f41b4f84dbbe6f33e3, type: 3}
-  Damage: 15
-  Type: 0
-  Uses: 3
-  Cam: {fileID: 0}
-  Use_Size: 3
-  Max_Range: 9000
-  Layers:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &1176813180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,8 +2913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d09ec8008936e44bbb7d5d8eafd0b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentModel: {fileID: 0}
-  Weapons: []
 --- !u!114 &1176813183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2982,7 +2926,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon_Current: {fileID: 0}
-  Weapons: []
   On_ChangeWeapon:
     m_PersistentCalls:
       m_Calls: []
@@ -2995,6 +2938,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179508134}
+  - component: {fileID: 1179508135}
+  - component: {fileID: 1179508136}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -3014,10 +2959,47 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1138964189}
+  m_Children: []
   m_Father: {fileID: 1176813181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1179508135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179508133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc7a52e8bf4c194eaddba600d67f5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapon_List:
+  - {fileID: 1179508136}
+--- !u!114 &1179508136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179508133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06f7fee1bdfcc647b44ab12ff023d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapon_Name: Test Ranged Weapon
+  Weapon_Index_: 0
+  Model: {fileID: 9212213312296223600, guid: 103b35ce2f1073f41b4f84dbbe6f33e3, type: 3}
+  Damage: 15
+  Type: 0
+  Uses: 1
+  Cam: {fileID: 0}
+  Use_Size: 1
+  Max_Range: 999
+  Layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1384463089
 GameObject:
   m_ObjectHideFlags: 0

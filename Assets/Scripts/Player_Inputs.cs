@@ -62,6 +62,15 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""97a418cb-be40-4773-921b-5d1314360d7a"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,17 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1c2fddd-e067-48b6-a5ac-957d96e053e8"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +195,7 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
         m_Standard_Fire_Main = m_Standard.FindAction("Fire_Main", throwIfNotFound: true);
         m_Standard_Fire_Secondary = m_Standard.FindAction("Fire_Secondary", throwIfNotFound: true);
         m_Standard_Movement = m_Standard.FindAction("Movement", throwIfNotFound: true);
+        m_Standard_Scroll = m_Standard.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,6 +261,7 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Standard_Fire_Main;
     private readonly InputAction m_Standard_Fire_Secondary;
     private readonly InputAction m_Standard_Movement;
+    private readonly InputAction m_Standard_Scroll;
     public struct StandardActions
     {
         private @Player_Inputs m_Wrapper;
@@ -248,6 +270,7 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
         public InputAction @Fire_Main => m_Wrapper.m_Standard_Fire_Main;
         public InputAction @Fire_Secondary => m_Wrapper.m_Standard_Fire_Secondary;
         public InputAction @Movement => m_Wrapper.m_Standard_Movement;
+        public InputAction @Scroll => m_Wrapper.m_Standard_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_Standard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,6 +292,9 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
         }
 
         private void UnregisterCallbacks(IStandardActions instance)
@@ -285,6 +311,9 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
         }
 
         public void RemoveCallbacks(IStandardActions instance)
@@ -308,5 +337,6 @@ public partial class @Player_Inputs: IInputActionCollection2, IDisposable
         void OnFire_Main(InputAction.CallbackContext context);
         void OnFire_Secondary(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }

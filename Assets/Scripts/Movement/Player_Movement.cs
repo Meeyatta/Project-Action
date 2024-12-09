@@ -56,7 +56,7 @@ public class Player_Movement : MonoBehaviour
         private void Update()
         {
             Vector2 readValue = Player_Inputs_.Standard.Movement.ReadValue<Vector2>();
-            Debug.Log(readValue.x);
+            //Debug.Log(readValue.x);
             Current_Input = new Vector3(readValue.x, 0, readValue.y);
 
             // Set movement state.

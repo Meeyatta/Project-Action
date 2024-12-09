@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1500,9 +1500,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963194228}
+  - {fileID: 251279287}
   - {fileID: 1176813181}
   - {fileID: 441077535}
-  - {fileID: 251279287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &492965981
@@ -1597,6 +1597,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 82137e98-b792-410b-b6b0-c0f89d104499
     m_ActionName: Standard/Fire_Secondary[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1176813180}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 97a418cb-be40-4773-921b-5d1314360d7a
+    m_ActionName: Standard/Scroll[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Standard
@@ -2062,9 +2078,6 @@ PrefabInstance:
     - target: {fileID: 11441180, guid: c080686877cf77f42a1a078076d57fe5, type: 3}
       propertyPath: textList.Array.data[0].s
       value: "\u041E\u0440\u0443\u0436\u0438\u044F\n\t\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
-        \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0435 \u043C\u043E\u0434\u0435\u043B\u044C\u043A\u0438
-        \u043E\u0440\u0443\u0436\u0438\u044F \u043D\u0430 \u044D\u043A\u0440\u0430\u043D\u0435
-        \u043F\u0440\u0438 \u0435\u0433\u043E \n\u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438\n\t\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C
         \u0442\u0435\u0441\u0442\u043E\u0432\u044B\u0439 UI \u0434\u043B\u044F \u0441\u043C\u0435\u043D\u044B
         \u043E\u0440\u0443\u0436\u0438\u044F\n\t\u041F\u0440\u0438\u0432\u044F\u0437\u0430\u0442\u044C
         UI \u0438 \u043A\u043E\u0434 \u043A \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044E\n\u0414\u0432\u0438\u0436\u0435\u043D\u0438\u0435\n\t\u0421\u0434\u0435\u043B\u0430\u0442\u044C
@@ -2913,6 +2926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d09ec8008936e44bbb7d5d8eafd0b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurModel: {fileID: 0}
+  CurOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1176813183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2941,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon_Current: {fileID: 0}
+  Max_Weapons_Equipped: 3
+  Weapons_Equipped: []
   On_ChangeWeapon:
+    m_PersistentCalls:
+      m_Calls: []
+  On_PickUpWeapon:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1179508133
@@ -2988,9 +3008,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06f7fee1bdfcc647b44ab12ff023d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon_Name: Test Ranged Weapon
+  Weapon_Name: 'Test Ranged Weapon '
   Weapon_Index_: 0
   Model: {fileID: 9212213312296223600, guid: 103b35ce2f1073f41b4f84dbbe6f33e3, type: 3}
+  Offset: {x: 0.9, y: -0.7, z: 1}
   Damage: 15
   Type: 0
   Uses: 1

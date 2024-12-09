@@ -9,6 +9,8 @@ using UnityEngine;
     Характеристики оружия:
     Weapon_Name - Имя оружия, которое показывается игроку
     Weapon_Index_ - Индекс оружия, как к нему "обращается" игра
+    Model - Моделька оружия для игрока
+    Offset - расположение модельки оружия относительно игрока
     Damage - Как много урона мы наносим за раз
     Type - Тип, служит как краткое "описание" оружия. TODO
     Uses - Как много раз мы можем использовать оружие. Разное оружие используется по разному
@@ -27,7 +29,7 @@ public class Weapon : MonoBehaviour, iHealthInteractable
     public string Weapon_Name;
     public WeaponIndex Weapon_Index_;
     public GameObject Model;
-    
+    public Vector3 Offset;
     public int Damage;
     public Weapon_Type Type;
     public int Uses; //Как много раз мы можем использовать оружие

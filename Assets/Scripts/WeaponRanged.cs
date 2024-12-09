@@ -18,7 +18,10 @@ public class WeaponRanged : Weapon
 
         RaycastHit hit;
         Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Max_Range, Layers);
-
+        if (hit.collider == null)
+        {
+            return null;
+        }
         Debug.Log("Игрок попал по " + hit.collider.gameObject.name + " из " + Weapon_Index_);
         if (hit.collider.gameObject.TryGetComponent<Health>(out Health hp))
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 //Код является адаптацией движения из Quake 3 от IsaiahKelly с небольшими изменениями
@@ -29,7 +30,10 @@ public class Player_Movement : MonoBehaviour
         //игрок мог нажать на пробел до приземления, а потом
         //прыгнуть сразу позле приземления
         public bool Jump_Able;
-        private bool Jump_Queued = false;
+        Coroutine WhileJumping;
+        [SerializeField] private const float Jump_Queued_Time = 0.1f; /* This time dictates how long 
+     the  game "Stores" queued jump while we are in the air*/
+        [SerializeField] private bool Jump_Queued = false;
 
         // Used to display real time friction values.
         private float Current_Friction = 0;
@@ -76,6 +80,17 @@ public class Player_Movement : MonoBehaviour
             Controller.Move(Velocity * Time.deltaTime);
         }
 
+        IEnumerator QueuedJumpDecease()
+        {
+            float f = Jump_Queued_Time;
+            while (f > 0) 
+            {
+                f -= 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+            Jump_Queued = false;
+            yield return null;
+        }
         //Если нажимаем прыжок, когда прыгнули, но ещё не приземлились, то прыжок "записывается", чтобы игрок
         //прыгнул как только он приземлится
         public void Queue_Jump(InputAction.CallbackContext c)
@@ -85,16 +100,20 @@ public class Player_Movement : MonoBehaviour
                 if (Auto_Bunny_Hop)
                 {
                     Jump_Able = true;
+                    //WhileJumping = StartCoroutine(QueuedJumpDecease());
                 }
                 else
                 {
                     if (!Jump_Queued)
                     {
                         Jump_Queued = true;
+                        WhileJumping = StartCoroutine(QueuedJumpDecease());
                     }
                     else
                     {
+                        StopCoroutine(WhileJumping);
                         Jump_Queued = false;
+                        WhileJumping = null;
                     }
                 }                   
             } 
